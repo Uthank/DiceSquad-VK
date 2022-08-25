@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
+  <title>Dice Squad</title>
+</head>
+
+<body style="margin: 0px; overflow: hidden;" oncontextmenu="return false;">
+  <canvas id="unity-canvas"
+    style="width: 100vw; height: 100vh; background: url('Build/c7c38e68aa4f5892d21aff6ca8443b96.jpg.unityweb') center / cover">
+  </canvas>
+
+  <div id="progress-bar"
+    style="position: absolute; left: 0%; right: 100%; top: 49%; bottom: 49%; background-color: white;"></div>
+
+  <script src="Build/DS.loader.js"></script>
+  <script>
+    const settings = {
+      dataUrl: "Build/0d2164d965f39cc413e182a382636f24.data.unityweb",
+      frameworkUrl: "Build/b8d4e2ce1f5224faf14f7462c9b66008.js.unityweb",
+      codeUrl: "Build/751bb67f755fc735e01e4520d17dbf0b.wasm.unityweb",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "IJunior",
+      productName: "Dice Squad",
+      productVersion: "0.1",
+      matchWebGLToCanvasSize: true,
+    };
+
+    const progressBar = document.querySelector("#progress-bar");
+
+    createUnityInstance(document.querySelector("#unity-canvas"), settings, (progress) => {
+      progressBar.style.right = 100 * (1 - progress) + "%";
+    }).then(() => {
+      progressBar.style.display = "none";
+    }).catch((message) => {
+      alert(message);
+    });
+  </script>
+</body>
+
+</html>
